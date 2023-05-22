@@ -378,3 +378,4 @@ vite.config.ts.timestamp-*
 
 # Custom files
 offers.csv
+postgres_data/*
