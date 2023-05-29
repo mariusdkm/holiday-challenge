@@ -37,4 +37,5 @@
   options={options}
   outerDivClass='flex-auto'
   placeholder=''
+  required
 />

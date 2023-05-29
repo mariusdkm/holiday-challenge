@@ -46,22 +46,25 @@ async function seedOffers() {
   );
 
   for await (const row of parser) {
+    const outbounddeparturedatetime = new Date(row.outbounddeparturedatetime);
+    const inboundarrivaldatetime = new Date(row.inboundarrivaldatetime);
     const offer = {
       hotelid: parseInt(row.hotelid),
-      outbounddeparturedatetime: new Date(row.outbounddeparturedatetime),
+      outbounddeparturedatetime: outbounddeparturedatetime,
       inbounddeparturedatetime: new Date(row.inbounddeparturedatetime),
       countadults: parseInt(row.countadults),
       countchildren: parseInt(row.countchildren),
       price: parseFloat(row.price),
       inbounddepartureairport: row.inbounddepartureairport,
       outboundarrivalairport: row.outboundarrivalairport,
-      inboundarrivaldatetime: new Date(row.inboundarrivaldatetime),
+      inboundarrivaldatetime: inboundarrivaldatetime,
       outbounddepartureairport: row.outbounddepartureairport,
       inboundarrivalairport: row.inboundarrivalairport,
       outboundarrivaldatetime: new Date(row.outboundarrivaldatetime),
       mealtype: row.mealtype,
       oceanview: row.oceanview === 'true',
-      roomtype: row.roomtype
+      roomtype: row.roomtype,
+      days: (inboundarrivaldatetime.getTime() - outbounddeparturedatetime.getTime()) / (1000 * 3600 * 24),
     };
 
     await prisma.offer.create({
@@ -75,7 +78,7 @@ async function main() {
   console.log(`Start seeding ...`);
 
   await seedHotels();
-  await seedOffers();
+  // await seedOffers();
 }
 
 main()

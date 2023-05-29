@@ -1,4 +1,13 @@
 -- CreateTable
+CREATE TABLE "Hotel" (
+    "id" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "stars" INTEGER NOT NULL,
+
+    CONSTRAINT "Hotel_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Offer" (
     "id" SERIAL NOT NULL,
     "hotelid" INTEGER NOT NULL,
@@ -16,6 +25,7 @@ CREATE TABLE "Offer" (
     "mealtype" TEXT NOT NULL,
     "oceanview" BOOLEAN NOT NULL,
     "roomtype" TEXT NOT NULL,
+    "days" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "Offer_pkey" PRIMARY KEY ("id")
 );

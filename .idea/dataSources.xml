@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/pgdb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="holiday_challenge@arion" uuid="8842ff9f-57d1-4d45-b1c3-c3db7821edf7">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://arion:5432/holiday_challenge</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

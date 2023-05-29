@@ -1,15 +1,21 @@
-<script>
+<script lang='ts'>
   import { slide } from 'svelte/transition';
+  import type { PageData } from './$types';
+  import HotelCard from '../../components/HotelCard.svelte';
+  import { navigating, page } from '$app/stores';
+  import { Spinner } from 'flowbite-svelte';
+
+  export let data: PageData;
 </script>
 
-<div class='p-5 w-full' in:slide={{ duration: 300}} out:slide={{ duration: 300}}>
-  {#each { length: 3 } as _, i}
-    <a
-      href='/hotel/{i}'
-      class='block bg-gray-200 rounded-lg w-full h-28 m-2'>
-      <div class='flex flex-col justify-center items-center h-full'>
-        <div class='text-2xl font-bold'>Hotel {i}</div>
-        <div class='text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</div>
-    </a>
-  {/each}
+<div class='p-5 w-[80vw]' in:slide={{ duration: 300}} out:slide={{ duration: 300}}>
+  {#if $navigating}
+    <div class='text-center'>
+      <Spinner size={6} />
+    </div>
+  {:else}
+    {#each data.offers as offer, _}
+      <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} />
+    {/each}
+  {/if}
 </div>

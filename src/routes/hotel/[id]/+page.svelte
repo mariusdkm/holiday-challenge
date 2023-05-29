@@ -1,8 +1,9 @@
 <script lang='ts'>
   import type { PageData } from './$types';
-  import { CloseButton } from 'flowbite-svelte';
-  import { afterNavigate, goto } from '$app/navigation';
-  import { fade } from 'svelte/transition';
+  import { afterNavigate } from '$app/navigation';
+  import { slide } from 'svelte/transition';
+  import OfferCard from '../../../components/OfferCard.svelte';
+  import IconStar from '~icons/ic/round-star';
 
   let previousPage = '/';
 
@@ -11,16 +12,24 @@
   });
 
   export let data: PageData;
+
 </script>
 
-<div class='w-full relative'>
-  <div
-    in:fade={{ duration: 100}} out:fade={{ duration: 100}}
-    class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-2/3 w-[90vw] h-[40vw] bg-gray-400 rounded-lg z-20 p-10'>
-    <CloseButton class='absolute top-0 right-0 m-5' on:click={() => goto(previousPage)} />
-    <h1 class='text-white font-bold text-2xl p-5'>{data.post.title}</h1>
-    <div class='text-gray-100'>Id {data.post.id}</div>
-    <div class='text-gray-100 text-justify'>{data.post.content}</div>
-  </div>
 
+<div class='w-[80vw] bg-primary-500 rounded-lg mt-5'>
+  <div class='flex justify-start content-start gap-5 p-5'>
+    <div class='text-2xl font-bold text-white ml-5'>{data.hotel.name}</div>
+    <div class='row-start-2 col-start-2 flex justify-start items-center'>
+      {#each { length: data.hotel.stars } as _, i}
+       <IconStar class='w-5 h-5 text-yellow-400 fill-current' />
+      {/each}
+    </div>
+    <!--      <div class='text-sm'>{JSON.stringify(data)}</div>-->
+  </div>
+  <!--  <CloseButton class='absolute top-0 right-0 m-5' on:click={() => goto(previousPage)} />-->
+    <div class='p-5' in:slide={{ duration: 300, axis: 'x'}} out:slide={{ duration: 300, axis: 'x'}}>
+    {#each data.offers as offer, i}
+      <OfferCard {offer}/>
+    {/each}
+  </div>
 </div>
