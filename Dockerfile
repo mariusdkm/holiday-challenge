@@ -1,5 +1,5 @@
 # stage build
-FROM node:16-alpine as builder
+FROM amd64/node:16-alpine as builder
 
 WORKDIR /app
 
@@ -17,14 +17,14 @@ RUN npm run build
 
 
 # stage run
-FROM node:16-alpine
+FROM amd64/node:16-alpine
 
 WORKDIR /app
 
 COPY --from=builder /app/package.json .
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/build ./build
-COPY --from=builder /app/.env ./.env
+#COPY --from=builder /app/.env ./.env
 
 
 EXPOSE 3000
