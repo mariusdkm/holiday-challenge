@@ -1,29 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: svelte-app
+  name: holiday-challenge
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: svelte-app
+      app: holiday-challenge
   template:
     metadata:
       labels:
-        app: svelte-app
+        app: holiday-challenge
     spec:
       containers:
-        - name: svelte-app
-          image: <your-docker-image>:<tag>
+        - name: holiday-challenge
+          image: ghcr.io/mariusdkm/holiday_challenge:latest
           ports:
             - containerPort: 3000
           env:
             - name: NODE_ENV
               value: production
-          resources:
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-            requests:
-              memory: "256Mi"
-              cpu: "250m"
+            - name: POSTGRES_USER
+              value: ...
+            - name: POSTGRES_PASSWORD
+              value: ...
+            - name: POSTGRES_DB
+              value: ...
+            - name: DATABASE_URL
+              value: ...
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: holiday-challenge-service
+spec:
+  selector:
+    app: holiday-challenge
+  ports:
+    - port: 3000 # Default port for image
