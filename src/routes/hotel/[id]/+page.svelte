@@ -36,4 +36,9 @@
       <OfferCard {offer} />
     {/each}
   </div>
+  <div class='flex justify-center items-center gap-5'>
+    <a
+      class='relative inline-flex items-center justify-center p-4 px-6 py-3 mt-2.5 text-sm font-medium transition duration-300 ease-out bg-primary-500 rounded-lg shadow-md group text-white hover:bg-primary-700'
+      href='/search?{data.modifiedSearch}'>Load more</a>
+  </div>
 </div>

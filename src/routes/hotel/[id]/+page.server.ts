@@ -19,7 +19,7 @@ export const load = (async ({ params, url }) => {
       countchildren: searchParams.children,
       outbounddeparturedatetime: { gt: searchParams.startDate.toISOString(), lt: searchParams.endDate.toISOString() }
     },
-    take: 10
+    take: searchParams.limit
   });
   const hotel = await prisma.hotel.findFirst({
     where: { id: Number(params.id) }
@@ -27,6 +27,10 @@ export const load = (async ({ params, url }) => {
 
   return {
     hotel: hotel,
-    offers: offers
+    offers: offers,
+    modifiedSearch: new URLSearchParams({
+      ...searchParams,
+      limit: searchParams.limit + 10
+    }).toString()
   };
 }) satisfies PageServerLoad;

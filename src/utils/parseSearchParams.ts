@@ -5,10 +5,11 @@ export type SearchParams = {
   adults: number,
   children: number,
   startDate: Date,
-  endDate: Date
+  endDate: Date,
+  limit: number
 }
 
-const urlSearchParams = ['days', 'departures', 'arrivals', 'adults', 'children', 'start', 'end'];
+const urlSearchParams = ['days', 'departures', 'arrivals', 'adults', 'children', 'start', 'end', 'limit'];
 
 export function parseSearchParams(url: URL): SearchParams | null {
   if (urlSearchParams.some(key => !url.searchParams.has(key))) {
@@ -22,6 +23,7 @@ export function parseSearchParams(url: URL): SearchParams | null {
     adults: parseInt(url.searchParams.get('adults')),
     children: parseInt(url.searchParams.get('children')),
     startDate: new Date(url.searchParams.get('start').split('.').reverse()),
-    endDate: new Date(url.searchParams.get('end').split('.').reverse())
+    endDate: new Date(url.searchParams.get('end').split('.').reverse()),
+    limit: parseInt(url.searchParams.get('limit'))
   } as SearchParams;
 }

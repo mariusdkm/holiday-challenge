@@ -1,5 +1,4 @@
 import type { PageServerLoad } from './$types';
-import type { SearchResult } from '../../utils/prisma';
 import prisma from '../../utils/prisma';
 import { parseSearchParams } from '../../utils/parseSearchParams';
 import { Prisma } from '@prisma/client';
@@ -30,9 +29,15 @@ export const load = (async ({ url }) => {
           AND offer.countchildren = ${searchParams.children}::integer
           AND offer.outbounddeparturedatetime > ${searchParams.startDate.toISOString()}::timestamp without time zone
           AND offer.outbounddeparturedatetime < ${searchParams.endDate.toISOString()}::timestamp without time zone
-        GROUP BY hotel.id, hotel.stars, hotel.name LIMIT 10`;
+        GROUP BY hotel.id, hotel.stars, hotel.name
+        LIMIT ${searchParams.limit}`;
+
 
   return {
-    offers: offers
+    offers: offers,
+    modifiedSearch: new URLSearchParams({
+      ...searchParams,
+      limit: searchParams.limit + 10
+    }).toString()
   };
 }) satisfies PageServerLoad;
