@@ -5,7 +5,7 @@ const config = {
   ],
 
   safelist: [
-    'absolute', 'text-sm', 'duration-300', 'bg-gray-50', 'transform', '-translate-y-5', 'scale-75', 'top-2.5', 'z-10', 'origin-[0]', 'left-7', 'peer-placeholder-shown:scale-100', 'peer-placeholder-shown:translate-y-0.5', 'peer-focus:scale-75', 'peer-focus:-translate-y-5', 'text-gray-500', 'dark:text-gray-400', 'peer-focus:text-primary-600', 'peer-focus:dark:text-primary-500'
+    '-translate-y-5','absolute','active','bg-blue-700','bg-gray-50','bg-white','block','border-0','cursor-pointer','dark:bg-blue-600','dark:bg-gray-700','dark:hover:bg-blue-700','dark:hover:bg-gray-600','dark:hover:text-white','dark:text-gray-400','dark:text-white','day','duration-300','flex','flex-1','focus:outline-none','focus:ring-2','focus:ring-4','focus:ring-blue-300','focus:ring-gray-200','font-medium','font-semibold','grid','grid-cols-7','h-4','h-6','hover:bg-blue-800','hover:bg-gray-100','hover:text-gray-900','inline-block','justify-between','leading-6','leading-9','left-0','left-7','mb-1','mb-2','mt-2','next-btn','origin-[0]','p-1', 'p-2.5','p-4','peer-focus:-translate-y-5','peer-focus:dark:text-primary-500','peer-focus:scale-75','peer-focus:text-primary-600','peer-placeholder-shown:scale-100','peer-placeholder-shown:translate-y-0.5','prev','prev-btn','pt-2','px-2','px-5','py-2','py-2.5','py-3','rounded-lg','scale-75','shadow-lg','space-x-2','text-center','text-gray-500','text-gray-900','text-lg','text-sm','text-white','top-0','top-2.5','transform','view-switch','w-1/2','w-4','w-64','z-10','z-50'
   ],
 
   plugins: [
@@ -16,6 +16,9 @@ const config = {
 
   theme: {
     extend: {
+      backgroundImage: theme => ({
+        'beach': "url('/beach.jpg')",
+      }),
       colors: {
         // flowbite-svelte
         //  primary: {50:'#ebf5ff',100: '#fff1ee',200:'#ffe4de',300:'#ffd5cc',400:'#ffbcad',500:'#fe795d',600:'#ef562f',700:'#eb4f27',800:'#d3330a',900:'#d3330a'}

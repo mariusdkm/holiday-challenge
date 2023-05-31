@@ -36,6 +36,6 @@
   id={id}
   options={options}
   outerDivClass='flex-auto'
-  placeholder=''
+  placeholder=' '
   required
 />

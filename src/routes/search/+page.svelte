@@ -8,14 +8,14 @@
   export let data: PageData;
 </script>
 
-<div class='p-5 w-[80vw]' in:slide={{ duration: 300}} out:slide={{ duration: 300}}>
+<div class='p-5 w-[80vw]'>
   {#if $navigating}
     <div class='text-center'>
       <Spinner size={6} />
     </div>
   {:else}
-    {#each data.offers as offer, _}
-      <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} />
+    {#each data.offers as offer, i}
+      <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} delay={i * 50} />
     {/each}
   {/if}
 </div>

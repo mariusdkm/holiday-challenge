@@ -1,5 +1,6 @@
 <script lang='ts'>
   import RandomHotelImage from './RandomHotelImage.svelte';
+  import { slide } from 'svelte/transition';
   import { Badge } from 'flowbite-svelte';
   import IconStar from '~icons/ic/round-star';
   import IconRightArrow from '~icons/octicon/arrow-right-16';
@@ -10,11 +11,13 @@
   export let offer: SearchResult;
   export let search: SearchParams;
   export let searchString: string;
+  export let delay = 0;
 </script>
 
 
 <div
-  class='bg-gray-200 rounded-lg w-full h-36 mb-3 drop-shadow-lg flex justify-start items-start gap-5 p-5'>
+  class='bg-gray-200 rounded-lg w-full h-36 mb-3 drop-shadow-lg flex justify-start items-start gap-5 p-5 last:-mb-5'
+  in:slide={{ duration: delay, delay: delay+100}} out:slide={{ duration: delay * 10}}>
   <RandomHotelImage seed='{offer.hotelid}' class='h-full self-start' />
   <div class=''>
     <div class='flex justify-start text-2xl font-bold gap-5'>

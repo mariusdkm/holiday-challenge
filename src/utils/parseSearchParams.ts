@@ -8,14 +8,20 @@ export type SearchParams = {
   endDate: Date
 }
 
-export function parseSearchParams(url: URL): SearchParams {
+const urlSearchParams = ['days', 'departures', 'arrivals', 'adults', 'children', 'start', 'end'];
+
+export function parseSearchParams(url: URL): SearchParams | null {
+  if (urlSearchParams.some(key => !url.searchParams.has(key))) {
+    return null;
+  }
+
   return {
-    days: parseInt(url.searchParams.get('days') ?? '5'),
-    departureAirports: JSON.parse(url.searchParams.get('departures') ?? '[]'),
-    arrivalAirports: JSON.parse(url.searchParams.get('arrivals') ?? '[]'),
-    adults: parseInt(url.searchParams.get('adults') ?? '2'),
-    children: parseInt(url.searchParams.get('children') ?? '0'),
-    startDate: new Date(url.searchParams.get('start') ?? new Date()),
-    endDate: new Date(url.searchParams.get('end') ?? new Date())
+    days: parseInt(url.searchParams.get('days')),
+    departureAirports: JSON.parse(url.searchParams.get('departures')),
+    arrivalAirports: JSON.parse(url.searchParams.get('arrivals')),
+    adults: parseInt(url.searchParams.get('adults')),
+    children: parseInt(url.searchParams.get('children')),
+    startDate: new Date(url.searchParams.get('start').split('.').reverse()),
+    endDate: new Date(url.searchParams.get('end').split('.').reverse())
   } as SearchParams;
 }

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svelte-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: svelte-app
+  template:
+    metadata:
+      labels:
+        app: svelte-app
+    spec:
+      containers:
+        - name: svelte-app
+          image: <your-docker-image>:<tag>
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: production
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

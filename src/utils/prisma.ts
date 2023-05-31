@@ -1,12 +1,12 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient({
-  log: [
-    {
-      emit: "event",
-      level: "query",
-    },
-  ],
+  // log: [
+  //   {
+  //     emit: "event",
+  //     level: "query",
+  //   },
+  // ],
 });
 
 export type OfferWithHotel = Prisma.OfferGetPayload<{
@@ -24,8 +24,8 @@ export type SearchResult = {
   enddate: Date
 }
 
-prisma.$on("query", async (e) => {
-    console.log(`${e.query} ${e.params}`)
-});
+// prisma.$on("query", async (e) => {
+//     console.log(`${e.query} ${e.params}`)
+// });
 
 export default prisma;

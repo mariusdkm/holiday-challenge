@@ -3,27 +3,18 @@ import type { SearchResult } from '../../utils/prisma';
 import prisma from '../../utils/prisma';
 import { parseSearchParams } from '../../utils/parseSearchParams';
 import { Prisma } from '@prisma/client';
+import { error } from '@sveltejs/kit';
 
 export const load = (async ({ url }) => {
 
   const searchParams = parseSearchParams(url);
-
-  console.log(searchParams);
-
-
-  const offers: [SearchResult] = [{
-    hotelid: 1,
-    name: 'Hotel',
-    stars: 5,
-    price: 100,
-    startdate: new Date(),
-    enddate: new Date()
-  }];
+  if (searchParams === null) {
+    return error(400, 'Wrong search parameters');
+  }
 
   searchParams.endDate.setDate(searchParams.endDate.getDate() - searchParams.days);
-  console.log(searchParams.startDate.toISOString());
 
-  const offersb =
+  const offers =
     await prisma.$queryRaw`
         SELECT hotel.id                             as hotelid,
                hotel.name                           as name,
@@ -42,6 +33,6 @@ export const load = (async ({ url }) => {
         GROUP BY hotel.id, hotel.stars, hotel.name LIMIT 10`;
 
   return {
-    offers: offersb
+    offers: offers
   };
 }) satisfies PageServerLoad;
