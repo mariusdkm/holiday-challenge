@@ -27,3 +27,11 @@ export function parseSearchParams(url: URL): SearchParams | null {
     limit: parseInt(url.searchParams.get('limit'))
   } as SearchParams;
 }
+
+export function modifyLimit(url: URL, newLimit: number): string {
+  const limitIndex = url.search.indexOf('limit=');
+  const limitNumberLength = url.searchParams.get('limit').length;
+  return url.search.slice(0, limitIndex)
+    + 'limit=' + newLimit
+    + url.search.slice(limitIndex + 'limit='.length + limitNumberLength);
+}

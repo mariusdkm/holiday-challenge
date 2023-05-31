@@ -1,12 +1,12 @@
 import type { PageServerLoad } from './$types';
 import prisma from '../../../utils/prisma';
-import { parseSearchParams } from '../../../utils/parseSearchParams';
+import { modifyLimit, parseSearchParams } from '../../../utils/parseSearchParams';
 import { error } from '@sveltejs/kit';
 
 export const load = (async ({ params, url }) => {
   const searchParams = parseSearchParams(url);
   if (searchParams === null) {
-    return error(400, 'Wrong search parameters');
+    throw error(400, 'Wrong search parameters');
   }
 
   searchParams.endDate.setDate(searchParams.endDate.getDate() - searchParams.days);
@@ -28,9 +28,6 @@ export const load = (async ({ params, url }) => {
   return {
     hotel: hotel,
     offers: offers,
-    modifiedSearch: new URLSearchParams({
-      ...searchParams,
-      limit: searchParams.limit + 10
-    }).toString()
+    modifiedSearch: modifyLimit(url, searchParams.limit + 10)
   };
 }) satisfies PageServerLoad;

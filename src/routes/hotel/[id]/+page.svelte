@@ -1,16 +1,9 @@
 <script lang='ts'>
   import type { PageData } from './$types';
-  import { afterNavigate } from '$app/navigation';
   import { slide } from 'svelte/transition';
   import IconStar from '~icons/ic/round-star';
   import { page } from '$app/stores';
   import OfferCard from '../../../components/OfferCard.svelte';
-
-  let previousPage = '/';
-
-  afterNavigate(({ from }) => {
-    previousPage = from?.url.pathname || previousPage;
-  });
 
   export let data: PageData;
 
@@ -39,6 +32,6 @@
   <div class='flex justify-center items-center gap-5'>
     <a
       class='relative inline-flex items-center justify-center p-4 px-6 py-3 mt-2.5 text-sm font-medium transition duration-300 ease-out bg-primary-500 rounded-lg shadow-md group text-white hover:bg-primary-700'
-      href='/search?{data.modifiedSearch}'>Load more</a>
+      href='/search{data.modifiedSearch}'>Load more</a>
   </div>
 </div>
