@@ -14,16 +14,21 @@
         <Spinner size={6} />
       </div>
     {:else}
-
-      {#each data.offers as offer, i}
-        <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} delay={i * 50} />
-      {/each}
-      <div class='flex justify-center items-center gap-5'>
-        <a
-          class='relative inline-flex items-center justify-center p-4 px-6 py-3 mt-2.5 text-sm font-medium transition duration-300 ease-out bg-primary-500 rounded-lg shadow-md group text-white hover:bg-primary-700'
-          href='/search{data.modifiedSearch}'>Load more</a>
-      </div>
-
+      {#if data.offers.length === 0}
+        <div class='text-center'>
+          <h1 class='text-2xl font-bold'>No results found</h1>
+          <p class='text-gray-500'>Try adjusting your search parameters</p>
+        </div>
+      {:else}
+        {#each data.offers as offer, i}
+          <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} delay={i * 50} />
+        {/each}
+        <div class='flex justify-center items-center gap-5'>
+          <a
+            class='relative inline-flex items-center justify-center p-4 px-6 py-3 mt-2.5 text-sm font-medium transition duration-300 ease-out bg-primary-500 rounded-lg shadow-md group text-white hover:bg-primary-700'
+            href='/search{data.modifiedSearch}'>Load more</a>
+        </div>
+      {/if}
     {/if}
   </div>
 {/key}
