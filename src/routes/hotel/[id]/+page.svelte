@@ -22,7 +22,7 @@
     </div>
     <!--    <CloseButton class='absolute top-0 right-0 m-5' on:click={() => goto(previousPage)} />-->
     <a
-      class='focus:outline-none whitespace-normal rounded-lg focus:ring-2 p-1.5 focus:ring-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 ml-auto absolute top-0 right-0 m-5 text-center font-bold w-8'
+      class='focus:outline-none whitespace-normal rounded-lg focus:ring-2 p-1.5 focus:ring-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 ml-auto absolute top-0 right-0 m-5 text-center font-bold w-8 text-white hover:text-gray-700'
       href='/search{$page.url.search}'>&#x2715</a>
 
     <div class='p-5' in:slide={{ duration: data.offers.length * 100, delay: 100}} out:slide={{ duration: 500}}>
