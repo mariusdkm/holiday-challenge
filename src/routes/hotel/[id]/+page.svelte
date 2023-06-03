@@ -1,6 +1,5 @@
 <script lang='ts'>
   import type { PageData } from './$types';
-  import { slide } from 'svelte/transition';
   import IconStar from '~icons/ic/round-star';
   import { page } from '$app/stores';
   import OfferCard from '../../../components/OfferCard.svelte';
@@ -39,7 +38,7 @@
         <p class='text-gray-300 pb-5'>Try adjusting your search parameters</p>
       </div>
     {:else}
-      <div class='p-5' in:slide={{ duration: offers.length * 100, delay: 100}} out:slide={{ duration: 500}}>
+      <div class='p-5'>
         {#each offers as offer, i}
           <OfferCard {offer} delay={i * 50} />
         {/each}
