@@ -40,7 +40,7 @@
     {:else}
       <div class='p-5'>
         {#each offers as offer, i}
-          <OfferCard {offer} delay={i * 50} />
+          <OfferCard {offer} delay={i * 10} />
         {/each}
       </div>
       <InfiniteScroll on:loadMore={loadMore} />

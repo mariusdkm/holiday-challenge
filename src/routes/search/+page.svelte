@@ -31,7 +31,7 @@
       </div>
     {:else}
       {#each offers as offer, i}
-        <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} delay={i * 50} />
+        <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} delay={i * 10} />
       {/each}
     {/if}
     <InfiniteScroll on:loadMore={loadMore} />

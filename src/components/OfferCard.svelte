@@ -27,7 +27,7 @@
 
 <div
   class='bg-gray-200 rounded-lg w-full h-36 mb-3 drop-shadow-lg flex justify-start items-start gap-5 p-5'
-  in:slide={{ duration: 100, delay: 100}} out:slide={{ duration: 100, delay: delay + 100}}>
+  in:slide={{ duration: 100, delay: 100}} out:slide={{ duration: 100, delay: delay}}>
   <RandomHotelImage class='h-full self-start' seed='{offer.id}' />
   <div class='grid grid-rows-2 grid-cols-1 flex-1 content-between h-full'>
     <div class='flex justify-start text-sm gap-4'>
