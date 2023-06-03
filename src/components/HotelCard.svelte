@@ -17,8 +17,8 @@
 
 <div
   class='bg-gray-200 rounded-lg w-full h-36 mb-3 drop-shadow-lg flex justify-start items-start gap-5 p-5 last:-mb-5'
-  in:slide={{ duration: delay, delay: delay+100}} out:slide={{ duration: delay * 10}}>
-  <RandomHotelImage seed='{offer.hotelid}' class='h-full self-start' />
+  in:slide={{duration: 100}} out:slide={{ duration: 100, delay: delay + 100}}>
+  <RandomHotelImage class='h-full self-start' seed='{offer.hotelid}' />
   <div class=''>
     <div class='flex justify-start text-2xl font-bold gap-5'>
       {offer.name}
@@ -37,10 +37,10 @@
   <div class='flex-1'></div>
   <!--  </div>-->
   <div class='h-full flex flex-col items-end justify-end'>
-    <Badge class='scale-100' large border><b>from {offer.price}</b>€</Badge>
+    <Badge border class='scale-100' large><b>from {offer.price}</b>€</Badge>
     <a
-      href='hotel/{offer.hotelid}{searchString}'
-      class='text-center font-medium focus:ring-4 focus:outline-none inline-flex items-center justify-center px-5 py-2.5 text-sm text-white bg-primary-700 hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700 focus:ring-primary-300 dark:focus:ring-primary-800 rounded-lg mt-auto'>Show
+      class='text-center font-medium focus:ring-4 focus:outline-none inline-flex items-center justify-center px-5 py-2.5 text-sm text-white bg-primary-700 hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700 focus:ring-primary-300 dark:focus:ring-primary-800 rounded-lg mt-auto'
+      href='hotel/{offer.hotelid}{searchString}'>Show
       more
       <IconRightArrow />
     </a>

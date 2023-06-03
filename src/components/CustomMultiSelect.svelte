@@ -25,13 +25,13 @@
 <MultiSelect
   --sms-bg='rgb(249 250 251 / 1)'
   --sms-border-radius='0.5rem'
+  --sms-focus-border='1pt solid rgb(14 165 233 / 1)'
   --sms-max-width='50%'
   --sms-min-height='48px'
   --sms-padding='9.5px 10px'
-  --sms-width='40%'
   --sms-selected-bg='rgb(14 165 233 / 1)'
-  --sms-focus-border='1pt solid rgb(14 165 233 / 1)'
   --sms-selected-text-color='white'
+  --sms-width='40%'
   bind:selected
   id={id}
   options={options}

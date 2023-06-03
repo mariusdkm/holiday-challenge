@@ -1,5 +1,5 @@
 # stage build
-FROM amd64/node:16-alpine as builder
+FROM node:16-alpine as builder
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ RUN npm run build
 
 
 # stage run
-FROM amd64/node:16-alpine
+FROM node:16-alpine
 
 WORKDIR /app
 

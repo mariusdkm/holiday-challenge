@@ -28,10 +28,14 @@ export function parseSearchParams(url: URL): SearchParams | null {
   } as SearchParams;
 }
 
-export function modifyLimit(url: URL, newLimit: number): string {
-  const limitIndex = url.search.indexOf('limit=');
-  const limitNumberLength = url.searchParams.get('limit').length;
-  return url.search.slice(0, limitIndex)
-    + 'limit=' + newLimit
-    + url.search.slice(limitIndex + 'limit='.length + limitNumberLength);
+export function paramsToRedisKey(params: SearchParams): string {
+  return [
+    params.days,
+    params.departureAirports.join(','),
+    params.arrivalAirports.join(','),
+    params.adults,
+    params.children,
+    params.startDate.toISOString(),
+    params.endDate.toISOString()
+  ].join(':');
 }

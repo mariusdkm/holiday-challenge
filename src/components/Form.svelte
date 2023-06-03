@@ -20,7 +20,7 @@
   export let children = 0;
   export let adults = 2;
   export let startDate: Date | null = new Date();
-  export let endDate: Date | null = new Date(new Date().setDate(new Date().getDate() + days))
+  export let endDate: Date | null = new Date(new Date().setDate(new Date().getDate() + days));
 
   onMount(() => {
     const datepicker_start = document.getElementsByName('start');
@@ -68,10 +68,11 @@
       />
     </div>
   </div>
-  <input name='limit' value='10' class='hidden'>
+  <input class='hidden' name='limit' value='10'>
   <div class='flex justify-center items-center gap-5'>
-    <button class='relative inline-flex items-center justify-center p-4 px-6 py-3 mt-2.5 overflow-hidden text-sm font-medium text-indigo-600 transition duration-300 ease-out border-2 bg-primary-500 border-primary-500 rounded-lg shadow-md group'
-            type='submit'>
+    <button
+      class='relative inline-flex items-center justify-center p-4 px-6 py-3 mt-2.5 overflow-hidden text-sm font-medium text-indigo-600 transition duration-300 ease-out border-2 bg-primary-500 border-primary-500 rounded-lg shadow-md group'
+      type='submit'>
 
       <span
         class='absolute inset-0 flex items-center justify-center w-full h-full text-white duration-200 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease'>

@@ -4,8 +4,18 @@
   import IconStar from '~icons/ic/round-star';
   import { page } from '$app/stores';
   import OfferCard from '../../../components/OfferCard.svelte';
+  import InfiniteScroll from '../../../components/InfiniteScroll.svelte';
 
   export let data: PageData;
+
+  let numberOfOffers = 10;
+  let offers = data.offers?.slice(0, numberOfOffers);
+
+  function loadMore() {
+    if (offers.length === data.offers?.length) return;
+    numberOfOffers += 10;
+    offers = data.offers?.slice(0, numberOfOffers);
+  }
 
 </script>
 
@@ -18,9 +28,7 @@
           <IconStar class='w-5 h-5 text-yellow-400 fill-current' />
         {/each}
       </div>
-      <!--      <div class='text-sm'>{JSON.stringify(data)}</div>-->
     </div>
-    <!--    <CloseButton class='absolute top-0 right-0 m-5' on:click={() => goto(previousPage)} />-->
     <a
       class='focus:outline-none whitespace-normal rounded-lg focus:ring-2 p-1.5 focus:ring-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 ml-auto absolute top-0 right-0 m-5 text-center font-bold w-8 text-white hover:text-gray-700'
       href='/search{$page.url.search}'>&#x2715</a>
@@ -31,16 +39,12 @@
         <p class='text-gray-300 pb-5'>Try adjusting your search parameters</p>
       </div>
     {:else}
-      <div class='p-5' in:slide={{ duration: data.offers.length * 100, delay: 100}} out:slide={{ duration: 500}}>
-        {#each data.offers as offer, i}
-          <OfferCard {offer} />
+      <div class='p-5' in:slide={{ duration: offers.length * 100, delay: 100}} out:slide={{ duration: 500}}>
+        {#each offers as offer, i}
+          <OfferCard {offer} delay={i * 50} />
         {/each}
       </div>
-      <div class='flex justify-center items-center gap-5 mb-5'>
-        <a
-          class='relative inline-flex items-center justify-center p-4 px-6 py-3 mb-5 text-sm font-medium transition duration-300 ease-out bg-gray-100 rounded-lg shadow-md group text-primary-500 hover:bg-gray-300'
-          href='/hotel/{data.offers[0].hotelid}{data.modifiedSearch}'>Load more</a>
-      </div>
+      <InfiniteScroll on:loadMore={loadMore} />
     {/if}
   </div>
 {/key}

@@ -3,32 +3,37 @@
   import HotelCard from '../../components/HotelCard.svelte';
   import { navigating, page } from '$app/stores';
   import { Spinner } from 'flowbite-svelte';
+  import InfiniteScroll from '../../components/InfiniteScroll.svelte';
 
   export let data: PageData;
+
+  let numberOfOffers = 10;
+  let offers = data.offers.slice(0, numberOfOffers);
+
+  function loadMore() {
+    if (offers.length === data.offers.length) return;
+    numberOfOffers += 10;
+    offers = data.offers.slice(0, numberOfOffers);
+  }
+
 </script>
 
-{#key data.offers}
-  <div class='p-5 w-[80vw]'>
-    {#if $navigating}
+<div class='p-5 w-[80vw]'>
+  {#if $navigating}
+    <div class='text-center'>
+      <Spinner size={6} />
+    </div>
+  {:else}
+    {#if data.offers.length === 0}
       <div class='text-center'>
-        <Spinner size={6} />
+        <h1 class='text-2xl font-bold'>No results found</h1>
+        <p class='text-gray-500'>Try adjusting your search parameters</p>
       </div>
     {:else}
-      {#if data.offers.length === 0}
-        <div class='text-center'>
-          <h1 class='text-2xl font-bold'>No results found</h1>
-          <p class='text-gray-500'>Try adjusting your search parameters</p>
-        </div>
-      {:else}
-        {#each data.offers as offer, i}
-          <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} delay={i * 50} />
-        {/each}
-        <div class='flex justify-center items-center gap-5'>
-          <a
-            class='relative inline-flex items-center justify-center p-4 px-6 py-3 mt-2.5 text-sm font-medium transition duration-300 ease-out bg-primary-500 rounded-lg shadow-md group text-white hover:bg-primary-700'
-            href='/search{data.modifiedSearch}'>Load more</a>
-        </div>
-      {/if}
+      {#each offers as offer, i}
+        <HotelCard {offer} search={data.searchParams} searchString={$page.url.search} delay={i * 50} />
+      {/each}
     {/if}
-  </div>
-{/key}
+    <InfiniteScroll on:loadMore={loadMore} />
+  {/if}
+</div>
