@@ -15,19 +15,25 @@ services:
       retries: 10
 
   redis:
-    image: redis/redis-stack-server:latest
+    image: redis
     restart: always
     ports:
       - "6379:6379"
-      - "8001:8001"
 
   svelte:
-    build:
-      context: .
-      dockerfile: Dockerfile
-#    image: ghcr.io/mariusdkm/holiday_challenge:latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    image: ghcr.io/mariusdkm/holiday_challenge:latest
     restart: always
     ports:
       - "3000:3000"
     env_file:
       - .env
+    depends_on:
+      - redis
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
