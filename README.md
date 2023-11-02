@@ -1,4 +1,4 @@
-# [holiday.bahnvorhersage.de](https://holiday.bahnvorhersage.de)
+# [holiday.unexcellent.com](https://holiday.unexcellent.com)
 
 Meine Einreichung für die Check24 GenDev Holiday Challenge
 
